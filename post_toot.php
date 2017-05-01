@@ -4,14 +4,13 @@ require_once 'functions.php';
 
 session_start();
 redirectToLoginPageIfNotLoggedIn();
-var_dump($_POST);
 $text = $_POST['text'];
 $user_id = $_SESSION['user_id'];
 $database = getDatabase();
 
 $database->query("
-    INSERT INTO `toot`( `user_id`, `text`) VALUES ($user_id,'{$text}')
-")->execute();
+    INSERT INTO `toot`( `user_id`, `text`, `created_at`) VALUES ($user_id,'{$text}',cast(now() as datetime))
+");
 
 
 header('Location: /');
