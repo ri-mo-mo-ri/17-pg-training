@@ -42,13 +42,20 @@ var_dump($toots);
                 <div class="label icon-home"><img class="label-icon" src="img/home.png" width="15" alt="Home - ">ホーム</div>
                <ul>
               <?php foreach ($toots as $toot) {
+                $user_id =  $toot["user_id"];
+
+                $database = getDatabase();
+                $user = $database->query("
+                  SELECT `login_name`, `display_name` FROM `user`
+                  WHERE id = {$user_id}"
+                  )->fetch(PDO::FETCH_ASSOC);
               echo <<<EOT
                <li>
                    <img width="30"　 src="img/home.png">
                  <div>
                  <div class="yoko">
-                    <div>名前</div>
-                    <div>(@ID)</div>
+                 <div>{$user['display_name']}</div>
+                 <div>{$user['login_name']}</div>
                    </div>
                    <p> {$toot['text']} </p>
                  </div>
