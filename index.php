@@ -10,6 +10,7 @@ $user_login_name = $_SESSION['user_login_name'];
 $database = getDatabase();
 $toots = $database->query("
   SELECT `user_id`, `text` FROM `toot`
+  ORDER BY `created_at`DESC
 ")->fetchAll(PDO::FETCH_ASSOC);
 var_dump($toots);
 ?>
@@ -53,7 +54,7 @@ var_dump($toots);
                  </div>
                 </li>
 EOT;
-                
+
               }
                 ?>
 
