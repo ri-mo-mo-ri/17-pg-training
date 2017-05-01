@@ -50,22 +50,30 @@ var_dump($toots);
                   WHERE id = {$user_id}"
                   )->fetch(PDO::FETCH_ASSOC);
               echo <<<EOT
-               <li>
-                   <img width="30"　 src="img/home.png">
-                 <div>
-                 <div class="yoko">
-                 <div>{$user['display_name']}</div>
-                 <div>{$user['login_name']}</div>
-                   </div>
-                   <p> {$toot['text']} </p>
-                 </div>
-                 <div class="toot_image">
-                 <img src={$image_url} width="150px" height="150px"/>
-                 </div>
-                </li>
+              <li>
+                <img width="30"　 src="img/home.png">
+                <div>
+                  <div class="yoko">
+                    <div>{$user['display_name']}</div>
+                    <div>{$user['login_name']}</div>
+                  </div>
+                  <p> {$toot['text']} </p>
+EOT;
+  $fname = $toot['image_file_name'];
+  if (isset($fname) && $fname != ''){
+  echo <<< EOT
+                  <div>
+                     <img class="toot_image" src={$image_url} />
+                  </div>
+EOT;
+ }
+  echo <<< EOT
+                </div>
+
+              </li>
 EOT;
 
-              }
+           }
                 ?>
 
 
